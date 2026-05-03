@@ -445,6 +445,8 @@ def send_kimi_texts(
     texts: list[str],
     max_concurrency: int = KIMI_MAX_CONCURRENCY,
     model_keyword: str = KIMI_DEFAULT_MODEL_KEYWORD,
+    user_data_dir: str = KIMI_USER_DATA_DIR,
+    max_retries: int = KIMI_TOTAL_RETRY_TIMES,
 ) -> list[dict]:
     """
     同步对外入口：并发发送多段文本到 Kimi。
@@ -455,7 +457,9 @@ def send_kimi_texts(
     输入：
     - texts：要发送的文本列表；
     - max_concurrency：最大并发标签页数，默认 3；
-    - model_keyword：模型关键字，默认"思考"。
+    - model_keyword：模型关键字，默认"思考"；
+    - user_data_dir：Chrome 持久化缓存目录，默认使用 D:\chromeCache；
+    - max_retries：页面加载或发送流程失败后的最大重试次数，默认 3 次。
 
     返回：
     - 成功：每条文本对应一个 dict，包含 input_text、selected_model、url；
@@ -463,7 +467,7 @@ def send_kimi_texts(
     """
 
     async def main() -> list[dict]:
-        async with AsyncKimiScraper(user_data_dir=KIMI_USER_DATA_DIR, max_retries=KIMI_TOTAL_RETRY_TIMES) as scraper:
+        async with AsyncKimiScraper(user_data_dir=user_data_dir, max_retries=max_retries) as scraper:
             semaphore = asyncio.Semaphore(max_concurrency)
 
             async def send_one(index: int, text: str) -> dict:

@@ -107,6 +107,8 @@ def send_kimi_texts(
     texts: list[str],
     max_concurrency: int = 3,
     model_keyword: str = "思考",
+    user_data_dir: str = r"D:\chromeCache",
+    max_retries: int = 3,
 ) -> list[dict]:
     ...
 ```
@@ -118,6 +120,8 @@ def send_kimi_texts(
 | `texts` | `list[str]` | 必填 | 要发送的文本列表。 |
 | `max_concurrency` | `int` | `3` | 最大并发标签页数。 |
 | `model_keyword` | `str` | `"思考"` | 模型关键字。每条任务都会按该关键字选择模型。 |
+| `user_data_dir` | `str` | `D:\chromeCache` | Chrome 持久化缓存目录，用于复用登录态。 |
+| `max_retries` | `int` | `3` | 页面加载或发送流程失败后的最大重试次数。 |
 
 ### 调用示例
 
