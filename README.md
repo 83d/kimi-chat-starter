@@ -1,5 +1,10 @@
 # Kimi 页面异步操作框架
 
+***🌱温馨提示***
+ - 本项目可作为参考，后续可以按相同的方式进行其他LLM的拓展，逻辑思路都是一样的。
+ 例如：千问（https://www.qianwen.com/）、豆包（https://www.doubao.com/chat/）等。
+
+
 本项目用于通过 Playwright 自动打开 Kimi 页面，复用本机 Chrome 登录态/缓存，向 Kimi 输入文本、选择模型并点击发送。
 
 目标站点：<https://www.kimi.com/>
